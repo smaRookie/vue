@@ -1,0 +1,22 @@
+import axios from 'axios'
+import Vue from 'vue'
+
+axios.interceptors.request.use(function (config) {
+  Vue.prototype.$Progress.start()
+  console.log('ssygjgfjhss')
+  return config
+}, function (error) {
+  Vue.prototype.$Progress.fail()
+  return Promise.reject(error)
+})
+axios.interceptors.response.use(function (response) {
+  Vue.prototype.$Progress.finish()
+  console.log('ssygjgfjhss')
+  return response
+}, function (error) {
+  Vue.prototype.$Progress.fail()
+  return Promise.reject(error)
+})
+export function s() {
+  return axios.get('http://rapapi.org/mockjs/23070/api/products?')
+}
