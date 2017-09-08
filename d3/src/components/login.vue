@@ -67,10 +67,10 @@
         }
       }
     },
-    beforeCreate () {
-      localStorage.setItem('login',false)
-      var time = new Date().getTime()
-      localStorage.setItem('leavetime', time)
+    mounted () {
+      this.$store.commit('chan','a')
+      console.log(this.$store.state.a.name)
+      console.log(this.$store.state.a)
     },
     methods: {
       login (formName) {

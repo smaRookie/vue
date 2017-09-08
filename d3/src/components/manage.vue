@@ -104,16 +104,12 @@
     mounted () {
       let self =this
       for(let i=0; i<10; i++){
-        s().then(function(res){
+        this.$axios.get('http://rapapi.org/mockjs/23070/api/products?').then(function(res){
             self.items.push(mock(res.data.com))
         }).catch(function(err){
           console.log(err)
         })
       }
-      this.$store.commit({
-        type: 'changeName',
-        n: 'dw'
-      })
       this.getmore()
       console.log(this.$store.state.login+'----')
     },

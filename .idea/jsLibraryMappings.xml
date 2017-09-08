@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/d3" libraries="{vue/d3/node_modules}" />
     <file url="file://$PROJECT_DIR$/d3/src" libraries="{vue/d3/src/node_modules}" />
     <file url="file://$PROJECT_DIR$/d4" libraries="{vue/d4/node_modules}" />
+    <file url="file://$PROJECT_DIR$/d5" libraries="{vue/d5/node_modules}" />
     <file url="file://$PROJECT_DIR$/v1" libraries="{vue/v1/node_modules}" />
     <file url="file://$PROJECT_DIR$/v2" libraries="{vue/v2/node_modules}" />
     <includedPredefinedLibrary name="ECMAScript 6" />

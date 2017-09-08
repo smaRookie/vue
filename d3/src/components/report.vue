@@ -8,8 +8,7 @@
 </template>
 <script>
   export default {
-    name: 'report',
-
+    name: 'report'
   }
 </script>
 <style>

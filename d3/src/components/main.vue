@@ -6,6 +6,7 @@
       <div class="view">
         <transition name="fade" mode="out-in">
           <router-view></router-view>
+          <!--<vue-progress-bar></vue-progress-bar>-->
         </transition>
       </div>
     </div>
@@ -28,11 +29,15 @@
       side,
       top
     },
+    created () {
+      this.$Progress.start()
+    },
     mounted () {
       this.additem(gItem('flag'))
       this.$refs.top.child();
       this.get()
       console.log(this.$route.query.data)
+      this.$Progress.finish()
 
     },
     destroyed () {
