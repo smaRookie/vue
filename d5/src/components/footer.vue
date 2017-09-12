@@ -1,7 +1,8 @@
 <template>
   <div class="footer">
     <div class="car">
-      <img src="./../../resource/SVG/shopping_cart.svg" alt="">
+      <!--<img src="./../../static/SVG/shopping_cart.svg" alt="">-->
+      <embed src="./../../static/SVG/shopping_cart.svg" type="image/svg+xml" />
     </div>
     <div></div>
     <div></div>
@@ -22,12 +23,16 @@
     width: 76px;
     height: 76px;
     border-radius: 50%;
-    background-color: #141d27;
+    background-color: #3C4043;
     display: inline-block;
     overflow: hidden;
-    img {
-      width: 60px;
-      height: 70px;
+    display: flex;
+    text-align: center;
+    align-items:center;
+    justify-content: center;
+  embed {
+      width: 46px;
+      height: 46px;
     }
   }
 </style>
