@@ -1,6 +1,6 @@
 <template>
   <section class="matter" ref="scoll">
-  <ul class="content" @scroll="console.log('ss')">
+  <ul class="content" ref="aim">
     <li class="ite" v-for="item in titles">
       <p class="matter_title">{{item.name}}</p>
       <div class="matter_con" v-for="food in item.foods">
@@ -107,14 +107,27 @@
 import add from './add'
 import BScroll from 'better-scroll'
 export default {
-  props: ['titles'],
+  props: ['titles','indexg'],
   components: {
     add
   },
   data () {
     return {
-      items : this.titles
+      items: this.titles,
+      heights: [],
+      posy: '',
+      index: '',
+      conlist: [],
+      side: ''
     }
+  },
+  created () {
+    this.$nextTick(function() {
+        let self = this
+      setTimeout(function(){
+        self.getHeight()
+      },100)
+    })
   },
   mounted: function() {
 //    this.roll()
@@ -125,14 +138,61 @@ export default {
       },100)
     })
   },
-  methods: {
-    roll () {
+  watch: {
+    index: function(val,oldval) {
+      this.$emit('tell',val)
+    },
+    state: function(val,oldval) {
       let scroll = new BScroll(this.$refs.scoll,{
         scrollY: true,
-        click: true
+        click: true,
+        probeType: 3
       })
-
+      scroll.scrollToElement(this.conlist[val],300)
     }
+
+  },
+  computed: {
+    state () {
+      return this.$store.state.sideindex
+    }
+  },
+  methods: {
+    roll () {
+      let self = this
+      this.conlist = this.$refs.aim.querySelectorAll('.ite')
+      let scroll = new BScroll(this.$refs.scoll,{
+        scrollY: true,
+        click: true,
+        probeType: 3
+      })
+      scroll.on('scroll',function(item){
+        self.posy=Math.abs(Math.round(item.y))
+        self.index = self.pos()
+        self.$store.commit('changePosition',self.index)
+      })
+    },
+    getHeight () {
+      let targets = this.$refs.aim.querySelectorAll('.ite')
+      let height = 0
+      this.heights.push(height)
+      let self = this
+      targets.forEach(function(item) {
+        height+=item.offsetHeight
+        self.heights.push(height)
+      })
+    },
+    pos () {
+      for(let i=0;i<this.heights.length; i++){
+        let height1 = this.heights[i]
+        let height2 = this.heights[i+1]
+        if(!height2 || (this.posy > height1 && this.posy < height2)){
+          return i
+        }
+      }
+      return 0;
+    }
+
   }
 }
 
