@@ -4,13 +4,13 @@
     <li class="ite" v-for="item in titles">
       <p class="matter_title">{{item.name}}</p>
       <div class="matter_con" v-for="food in item.foods">
-        <div>
+        <div class="matter_inner">
           <img :src="food.image" alt="">
           <div class="matter_right">
             <p>{{food.name}}</p>
             <p>{{food.description}}</p>
             <p>月售{{food.sellCount}}份 &nbsp;好评率{{food.rating}}%</p>
-            <p><span class="newprice">￥{{food.price}}</span><span class="oldprice" v-if="food.oldPrice!=''">￥{{food.oldPrice}}</span><add class="add"></add></p>
+            <p><span class="newprice">￥{{food.price}}</span><span class="oldprice" v-if="food.oldPrice!=''">￥{{food.oldPrice}}</span><add class="add" :food="food"></add></p>
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@
   </ul>
   </section>
 </template>
-<style lang="less">
+<style lang="less" scoped>
   .matter {
     max-height: e("calc(100% - 237px)");
     width: calc(~"100% - 100px");
@@ -43,7 +43,7 @@
       width: 100%;
       background-color: #fff;
       box-sizing: border-box;
-      div:first-child {
+      .matter_inner {
         height: 100%;
         margin: 18px 18px 0 18px;
         position: relative;
@@ -107,7 +107,8 @@
 import add from './add'
 import BScroll from 'better-scroll'
 export default {
-  props: ['titles','indexg'],
+  props: ['titles'],
+
   components: {
     add
   },
@@ -119,6 +120,12 @@ export default {
       index: '',
       conlist: [],
       side: ''
+    }
+  },
+  computed: {
+    f() {
+      console.log(this.titles.foods,'--')
+      return this.side
     }
   },
   created () {
